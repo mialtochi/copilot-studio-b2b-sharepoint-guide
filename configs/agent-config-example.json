@@ -1,0 +1,68 @@
+# Copilot Studio Agent Config (Manual Auth Only)
+
+This file documents only the exact proven path used in this repository:
+
+- Manual authentication
+- Microsoft Entra ID v2 federated credentials
+- SharePoint grounding with delegated user access
+- Internal and B2B guest users
+
+## Reference Configuration
+
+```json
+{
+  "agent": {
+    "name": "B2B SharePoint Knowledge Agent",
+    "description": "Copilot Studio agent with SharePoint grounding for internal and guest users"
+  },
+  "authentication": {
+    "mode": "manual",
+    "provider": "microsoft-entra-id-v2-federated-credentials",
+    "requireSignIn": true,
+    "scopes": [
+      "profile",
+      "openid"
+    ],
+    "federatedCredential": {
+      "issuer": "<copilot-studio-issuer-value>",
+      "subject": "<copilot-studio-subject-value>"
+    },
+    "appRegistration": {
+      "tenantType": "single-tenant",
+      "clientId": "<entra-app-client-id>",
+      "redirectUri": "https://token.botframework.com/.auth/web/redirect"
+    },
+    "graphDelegatedPermissions": [
+      "openid",
+      "profile",
+      "User.Read",
+      "Sites.Read.All",
+      "Files.Read.All"
+    ],
+    "adminConsentRequired": true
+  },
+  "knowledgeSource": {
+    "type": "sharepoint",
+    "siteUrl": "https://your-tenant.sharepoint.com/sites/your-site",
+    "accessModel": "delegated-user-context"
+  },
+  "sharing": {
+    "shareFromCopilotStudio": true,
+    "allowedUsers": [
+      "internal-users",
+      "guest-users",
+      "or-security-group"
+    ]
+  },
+  "webChannel": {
+    "enabled": true,
+    "embed": "<iframe src=\"your-copilot-url\"></iframe>"
+  }
+}
+```
+
+## Notes
+
+- This is a documentation reference, not an importable Copilot Studio schema.
+- SSO is intentionally not included for this scenario.
+- SharePoint access is enforced at runtime based on each user's permissions.

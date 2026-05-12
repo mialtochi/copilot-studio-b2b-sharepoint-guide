@@ -1,0 +1,96 @@
+# Git ignore file for Copilot Studio B2B Guide
+
+# Secrets and sensitive data - NEVER commit
+*.env
+*.env.local
+*.env.*.local
+*.secrets
+secrets.json
+config.local.json
+credentials.json
+auth.json
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+~$*
+
+# Build and dist
+dist/
+build/
+*.zip
+
+# Logs
+*.log
+logs/
+debug.log
+
+# OS files
+.DS_Store
+Thumbs.db
+.windows/
+
+# Node modules (if using any Node tools)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+
+# User-specific screenshots (before cleanup)
+screenshots/temp/
+screenshots/draft/
+
+# Backup files
+*.backup
+*.bak
+*.swp
+~*.*
+
+# Files with PII (if capturing real data)
+*-users.csv
+*-guest-list.csv
+*-emails.txt
+
+# Docker files (if using containers)
+docker-compose.local.yml
+.dockerignore
+
+# Any configuration files with real tenant IDs
+*.tenant-id
+*-config.local.json
+config.prod.json
+
+# Test results
+test-results/
+*.trx
+coverage/
+
+# IDE workspace files
+*.code-workspace
+
+# Git files
+.git/
+.gitattributes
+
+# Any file with real email addresses
+*-email-list.txt
+*-users-export.csv
+
+# Sensitive documentation
+INTERNAL_*.md
+CONFIDENTIAL_*.md
