@@ -4,18 +4,6 @@
 
 This guide provides detailed test cases and validation procedures to ensure your B2B SharePoint Copilot agent works correctly for both internal and guest users.
 
-## Suggested Screenshot Evidence
-
-Capture these during validation to make troubleshooting and handoff easier:
-
-- internal-user-signed-in-status.png (agent loaded and signed-in indicator)
-- internal-user-search-success.png (successful grounded result)
-- guest-sign-in-prompt.png (guest sees sign-in flow)
-- guest-search-shared-doc-success.png (guest can open shared content)
-- guest-internal-doc-not-returned.png (internal-only content not exposed)
-
-Store all evidence images under `screenshots` and redact emails, tenant IDs, and document secrets.
-
 ---
 
 ## Pre-Test Checklist
