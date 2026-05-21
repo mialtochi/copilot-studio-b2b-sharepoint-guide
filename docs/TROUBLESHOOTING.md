@@ -2,6 +2,18 @@
 
 ## Common Issues & Solutions
 
+## Screenshot Placeholders for Faster Support
+
+When reporting issues, attach these screenshots (redacted) so root cause can be identified quickly:
+
+- troubleshoot-auth-signin-error.png (guest sign-in error screen)
+- troubleshoot-entra-guest-user-status.png (Entra guest user status page)
+- troubleshoot-sharepoint-access-denied.png (SharePoint access denied page)
+- troubleshoot-copilot-auth-settings.png (Copilot Studio authentication settings)
+- troubleshoot-entra-api-permissions.png (Entra API permissions with consent state)
+
+Store images in the `screenshots` folder and redact sensitive values before sharing.
+
 ---
 
 ## Category 1: Authentication Issues

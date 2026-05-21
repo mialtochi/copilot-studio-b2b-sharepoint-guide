@@ -11,6 +11,13 @@ Prepare SharePoint as knowledge source so both internal and guest users can retr
 - Identify the SharePoint site to ground on.
 - Confirm the target document library/folders.
 
+Where to click:
+
+1. Open SharePoint site.
+2. Select Site contents.
+3. Open the document library that will back the agent.
+4. Confirm files and folder scope.
+
 ## Step 2: Ensure User Access Exists Before Runtime
 
 Grant access in SharePoint to:
@@ -34,11 +41,14 @@ Before testing the agent:
 
 If this fails, fix SharePoint sharing/permissions first.
 
+
 ## Step 4: Keep Library Content Ready for Grounding
 
 - Keep source files current.
 - Prefer clear file naming.
 - Remove obsolete content that should not be retrieved.
+
+
 
 ## Validation Checklist
 

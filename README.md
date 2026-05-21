@@ -78,35 +78,7 @@ In Copilot Studio:
 - Configure name, description, and instructions
 - Add SharePoint site as knowledge source
 
-### Step 3: Configure Authentication in Copilot Studio
-
-Path:
-
-Settings → Security → Authentication
-
-Change:
-
-- From: Authenticate with Microsoft
-- To: Authenticate manually
-
-Configure:
-
-- Service provider: Microsoft Entra ID v2 with federated credentials
-- Require users to sign in: On
-- Scopes: profile openid
-
-Save.
-
-### Step 4: Copy Federated Credential Values
-
-After saving authentication settings, copy:
-
-- Federated credential issuer
-- Federated credential value
-
-These values are required for app registration setup.
-
-### Step 5: Create App Registration
+### Step 3: Create App Registration
 
 In Entra:
 
@@ -119,7 +91,9 @@ Configuration:
 
 Register.
 
-### Step 6: Configure Redirect URI
+![Screenshot: Entra app registrations new registration form](screenshots/step-05-entra-new-app-registration.png)
+
+### Step 4: Configure Redirect URI and Graph Permissions in Entra
 
 Path:
 
@@ -134,26 +108,7 @@ Enable:
 - Access tokens
 - ID tokens
 
-Save.
-
-### Step 7: Configure Federated Credentials
-
-Path:
-
-Certificates and secrets → Federated credentials
-
-Add credential:
-
-- Type: Other issuer
-- Issuer: Paste value from Copilot Studio
-- Subject/Value: Paste value from Copilot Studio
-- Name: Copilot-FIC (or your preferred name)
-
-Save.
-
-### Step 8: Configure Microsoft Graph Permissions
-
-Path:
+Then configure Graph delegated permissions:
 
 API permissions → Add permission → Microsoft Graph → Delegated
 
@@ -169,17 +124,85 @@ Important:
 
 Grant admin consent. Without this, SharePoint grounding fails.
 
-### Step 9: Connect App Registration to Copilot Studio
+![Screenshot: Entra authentication tab with web redirect URI and token settings](screenshots/step-06-entra-redirect-uri.png)
 
-Return to Copilot Studio authentication settings.
+![Screenshot: Entra API permissions with delegated Graph permissions and admin consent](screenshots/step-08-entra-graph-permissions.png)
 
-Add:
+### Step 5: Copy Client ID from App Registration
 
-- Client ID: Application (client) ID from app registration
+From app overview, copy:
+
+- Application (client) ID
+
+You will use this immediately in Copilot Studio authentication settings.
+
+![Screenshot: Entra app overview showing application client ID](screenshots/entra-step-05-client-id.png)
+
+### Step 6: Configure Authentication in Copilot Studio
+
+Path:
+
+Settings → Security → Authentication
+
+Where to click:
+
+1. Open the target agent in Copilot Studio.
+2. In the left navigation, open **Settings**.
+3. Select **Security**.
+4. Select **Authentication**.
+
+Change:
+
+- From: Authenticate with Microsoft
+- To: Authenticate manually
+
+Configure:
+
+- Service provider: Microsoft Entra ID v2 with federated credentials
+- Require users to sign in: On
+- Scopes: profile openid
+- Client ID: Application (client) ID from Entra app registration
 
 Save.
 
-### Step 10: Share the Agent
+![Screenshot: Copilot Studio authentication page set to Authenticate manually](screenshots/step-03-copilot-auth-manual.png)
+
+### Step 7: Copy Federated Credential Values
+
+After saving authentication settings, copy:
+
+- Federated credential issuer
+- Federated credential value
+
+These values are required for app registration setup.
+
+Where to find them:
+
+1. Stay on the same **Authentication** page in Copilot Studio.
+2. Scroll to the federated credentials section shown after saving manual auth.
+3. Copy both values exactly as shown.
+4. Paste them temporarily into a secure scratch note so you can reuse them in Entra ID.
+
+![Screenshot: Copilot Studio federated credential issuer and value fields](screenshots/step-04-copilot-fic-values.png)
+
+### Step 8: Configure Federated Credentials in Entra
+
+Path:
+
+Certificates and secrets → Federated credentials
+
+Add credential:
+
+- Type: Other issuer
+- Issuer: Paste value from Copilot Studio
+- Subject/Value: Paste value from Copilot Studio
+- Name: Copilot-FIC (or your preferred name)
+
+Save.
+
+![Screenshot: Entra federated credentials add credential form using Other issuer](screenshots/step-07-entra-federated-credential.png)
+
+### Step 9: Share the Agent
 
 Path:
 
@@ -208,11 +231,13 @@ Meaning:
 
 Agent access was controlled by agent sharing in Copilot Studio, not explicit environment roles.
 
-### Step 11: Publish the Agent
+![Screenshot: Copilot Studio share panel with internal and guest users](screenshots/step-10-copilot-share-panel.png)
+
+### Step 10: Publish the Agent
 
 After changes, publish the agent.
 
-### Step 12: Deploy Web App
+### Step 11: Deploy Web App
 
 Path:
 
@@ -225,6 +250,8 @@ Copy embed code and use in HTML:
 ```
 
 Used locally for testing.
+
+![Screenshot: Copilot Studio web app channel showing embed code](screenshots/step-12-copilot-web-channel-embed.png)
 
 ## Testing
 
@@ -303,10 +330,10 @@ Recommended:
 
 - Main implementation guide: [README.md](README.md)
 - Quick start summary: [QUICKSTART.md](QUICKSTART.md)
-- Publishing notes: [PUBLISH_TO_GITHUB.md](PUBLISH_TO_GITHUB.md)
 - Deep dive docs:
    - [docs/ENTRA_ID_SETUP.md](docs/ENTRA_ID_SETUP.md)
   - [docs/SHAREPOINT_SETUP.md](docs/SHAREPOINT_SETUP.md)
   - [docs/COPILOT_STUDIO_SETUP.md](docs/COPILOT_STUDIO_SETUP.md)
   - [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md)
   - [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+

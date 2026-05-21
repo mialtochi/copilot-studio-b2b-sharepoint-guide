@@ -14,6 +14,7 @@ Before this section:
 - SharePoint site is ready
 - Internal and guest users already have SharePoint access
 - Guest users were invited and accepted in tenant
+- Entra app registration already exists and Application (client) ID is available
 
 ## Step 1: Create Agent
 
@@ -46,8 +47,21 @@ Set:
 - Provider: Microsoft Entra ID v2 with federated credentials
 - Require users to sign in: On
 - Scopes: profile openid
+- Client ID: paste Application (client) ID from Entra app registration
 
 Save.
+
+Where to click:
+
+1. Open the agent.
+2. In left navigation, open Settings.
+3. Select Security.
+4. Select Authentication.
+5. Change to Authenticate manually.
+6. Paste the Entra Application (client) ID.
+7. Save.
+
+![Screenshot: Copilot Studio authentication screen set to manual](../screenshots/step-03-copilot-auth-manual.png)
 
 ## Step 4: Copy Federated Credential Values
 
@@ -58,13 +72,23 @@ After saving manual authentication, copy:
 
 You will use them in Entra app registration.
 
-## Step 5: Add Client ID Back to Copilot Studio
+Where to find them:
 
-After app registration is configured in Entra:
+1. Stay on the Authentication page after saving.
+2. Locate the federated credential section rendered on that page.
+3. Copy Issuer and Value exactly.
 
-1. Return to Copilot Studio authentication settings.
-2. Enter app registration client ID.
-3. Save.
+![Screenshot: Copilot Studio federated credential issuer and value fields](../screenshots/step-04-copilot-fic-values.png)
+
+## Step 5: Create Federated Credential in Entra
+
+After Step 4 in Copilot Studio:
+
+1. Open Entra app registration.
+2. Go to Certificates and secrets → Federated credentials.
+3. Add credential with Other issuer.
+4. Paste Issuer and Value copied from Copilot Studio.
+5. Save.
 
 ## Step 6: Share Agent
 
@@ -82,6 +106,8 @@ Important:
 
 If user is not shared on the agent, user cannot run the agent.
 
+![Screenshot: Copilot Studio share dialog with internal and guest users](../screenshots/step-10-copilot-share-panel.png)
+
 ## Step 7: Publish Agent
 
 Publish after authentication and sharing changes.
@@ -95,6 +121,8 @@ Publish after authentication and sharing changes.
 ```html
 <iframe src="your-copilot-url"></iframe>
 ```
+
+![Screenshot: Copilot Studio web app channel showing embed code](../screenshots/step-12-copilot-web-channel-embed.png)
 
 ## Validation
 
